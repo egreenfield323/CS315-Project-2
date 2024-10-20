@@ -1,0 +1,2 @@
+Tile assets: https://brullov.itch.io/oak-woods
+Character asset: https://brullov.itch.io/generic-char-asset
