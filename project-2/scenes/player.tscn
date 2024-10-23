@@ -76,7 +76,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_sq336"]
 resource_name = "jump"
-step = 0.1
+length = 0.87
+step = 0.09
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,7 +85,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"times": PackedFloat32Array(0, 0.0909091, 0.181818, 0.272727, 0.363636, 0.454545, 0.545455, 0.636364, 0.727273, 0.818182),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [24, 25, 26, 30, 31, 32, 33, 37, 38, 39]
@@ -206,7 +207,7 @@ states/jump/position = Vector2(463, -30.564)
 states/run/node = SubResource("AnimationNodeAnimation_7otxa")
 states/run/position = Vector2(373.5, 237.75)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ka32k"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iepse"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_a8soc"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_ervl2"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_eao08"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_fsijl"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_xm5po"), "idle", "crouch", SubResource("AnimationNodeStateMachineTransition_rqbyj"), "crouch", "idle", SubResource("AnimationNodeStateMachineTransition_oyvcr"), "run", "jump 2", SubResource("AnimationNodeStateMachineTransition_knfsm"), "jump 2", "run", SubResource("AnimationNodeStateMachineTransition_22mwl"), "run", "attack 2", SubResource("AnimationNodeStateMachineTransition_xk1o8"), "attack 2", "run", SubResource("AnimationNodeStateMachineTransition_7dgix")]
-graph_offset = Vector2(0, 29.2602)
+graph_offset = Vector2(-164.615, 122.143)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)

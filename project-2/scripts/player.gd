@@ -24,10 +24,8 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		anim_tree['parameters/conditions/idle'] = false
 		anim_tree['parameters/conditions/jump'] = true
 	else:
-		anim_tree['parameters/conditions/idle'] = true
 		anim_tree['parameters/conditions/jump'] = false
 
 	var direction := Input.get_axis("left", "right")
