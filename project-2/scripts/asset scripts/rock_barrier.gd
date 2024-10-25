@@ -11,6 +11,9 @@ func get_health():
 
 func hit(hitpoints: int):
 	health -= hitpoints
+	
+	get_parent().get_parent().get_node("Particles").play_particle("rock_hit_particle", self.position)
+	
 	var hit_particle = rock_hit_particles.instantiate()
 	add_child(hit_particle)
 	hit_particle.emitting = true
