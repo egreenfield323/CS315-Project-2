@@ -25,4 +25,4 @@ func play_particle(name: String):
 			
 func _emit(particle: GPUParticles2D):
 	particle.emitting = true
-	
+	particle.l
