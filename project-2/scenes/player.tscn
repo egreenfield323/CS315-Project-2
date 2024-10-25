@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cxwy8hon44nke"]
+[gd_scene load_steps=33 format=3 uid="uid://cxwy8hon44nke"]
 
 [ext_resource type="Texture2D" uid="uid://cyw8wilh4gw7w" path="res://assets/character/png/blue/char_blue_1.png" id="1_v3rsy"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yyklj"]
@@ -21,6 +21,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sword_hitbox:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="Animation" id="Animation_03jp2"]
 resource_name = "attack"
@@ -37,6 +49,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [8, 9, 10, 11, 12, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sword_hitbox:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
 }
 
 [sub_resource type="Animation" id="Animation_iosab"]
@@ -207,7 +231,10 @@ states/jump/position = Vector2(463, -30.564)
 states/run/node = SubResource("AnimationNodeAnimation_7otxa")
 states/run/position = Vector2(373.5, 237.75)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ka32k"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iepse"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_a8soc"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_ervl2"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_eao08"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_fsijl"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_xm5po"), "idle", "crouch", SubResource("AnimationNodeStateMachineTransition_rqbyj"), "crouch", "idle", SubResource("AnimationNodeStateMachineTransition_oyvcr"), "run", "jump 2", SubResource("AnimationNodeStateMachineTransition_knfsm"), "jump 2", "run", SubResource("AnimationNodeStateMachineTransition_22mwl"), "run", "attack 2", SubResource("AnimationNodeStateMachineTransition_xk1o8"), "attack 2", "run", SubResource("AnimationNodeStateMachineTransition_7dgix")]
-graph_offset = Vector2(-334.615, -134.857)
+graph_offset = Vector2(-334.615, 22.505)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqdhi"]
+size = Vector2(37.5, 29.5)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -236,3 +263,12 @@ parameters/conditions/crouch = false
 parameters/conditions/idle = false
 parameters/conditions/jump = false
 parameters/conditions/run = false
+
+[node name="sword_hitbox" type="Area2D" parent="."]
+process_mode = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sword_hitbox"]
+position = Vector2(8.75, 11.25)
+shape = SubResource("RectangleShape2D_eqdhi")
+
+[connection signal="body_entered" from="sword_hitbox" to="." method="_on_sword_hitbox_body_entered"]

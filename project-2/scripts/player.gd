@@ -55,3 +55,10 @@ func _physics_process(delta: float) -> void:
 	
 func unlock_glasses():
 	has_glasses = true
+
+
+func _on_sword_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method("is_hitable"):
+		body.hit(1)
+	
+	pass # Replace with function body.

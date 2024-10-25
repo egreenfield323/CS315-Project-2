@@ -1,14 +1,19 @@
-[gd_scene load_steps=17 format=4 uid="uid://c7xreq8f24wtk"]
+[gd_scene load_steps=23 format=4 uid="uid://c7xreq8f24wtk"]
 
 [ext_resource type="TileSet" uid="uid://b0qtvicno0wrh" path="res://assets/tiles/tilesets/sprites.tres" id="1_iv5e1"]
 [ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="1_m6p2m"]
 [ext_resource type="PackedScene" uid="uid://cxwy8hon44nke" path="res://scenes/player.tscn" id="2_c122j"]
 [ext_resource type="Texture2D" uid="uid://bwwjshjgxbacp" path="res://assets/tiles/background/background_layer_3.png" id="2_m4g2g"]
+[ext_resource type="Script" path="res://scripts/particles.gd" id="4_1deir"]
 [ext_resource type="Texture2D" uid="uid://c642wy6gyiit4" path="res://assets/tiles/background/background_layer_2.png" id="4_3wbcp"]
 [ext_resource type="Texture2D" uid="uid://cgus2245no0yn" path="res://assets/tiles/decorations/shop_anim.png" id="4_nt7a6"]
 [ext_resource type="Texture2D" uid="uid://b81n5hwi5ugee" path="res://assets/tiles/decorations/sign.png" id="5_bjaly"]
 [ext_resource type="Script" path="res://scripts/asset scripts/sign_area_2d.gd" id="5_psbrw"]
 [ext_resource type="FontFile" uid="uid://ojlelghld24q" path="res://assets/fonts/Arima-Regular.ttf" id="7_4lw73"]
+[ext_resource type="Script" path="res://scripts/asset scripts/rock_barrier.gd" id="8_c6dgk"]
+[ext_resource type="Texture2D" uid="uid://cl0cny68eqxyj" path="res://assets/tiles/decorations/rock_1.png" id="8_gxh4g"]
+[ext_resource type="PackedScene" uid="uid://bqai7cksvucus" path="res://particles/rock_hit_particles.tscn" id="9_imv33"]
+[ext_resource type="Texture2D" uid="uid://bihottil14s6c" path="res://assets/tiles/decorations/rock_2.png" id="9_kh63v"]
 [ext_resource type="Script" path="res://scripts/asset scripts/glasses.gd" id="10_fvmmr"]
 [ext_resource type="Texture2D" uid="uid://ljgbu1ss46hg" path="res://assets/objects/glasses.png" id="10_g3mrl"]
 
@@ -54,6 +59,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wwl5"]
 size = Vector2(28, 40)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fchpy"]
+radius = 90.0056
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x0sh"]
 
 [node name="level1" type="Node2D"]
@@ -95,6 +103,9 @@ texture_repeat = 1
 scale = Vector2(1.82778, 1.82778)
 texture = ExtResource("2_m4g2g")
 centered = false
+
+[node name="Particles" type="Node2D" parent="."]
+script = ExtResource("4_1deir")
 
 [node name="Decorations" type="Node2D" parent="."]
 
@@ -161,6 +172,28 @@ theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("7_4lw73")
 theme_override_font_sizes/font_size = 100
 text = "Press ^ to jump"
+
+[node name="rock_barrier" type="StaticBody2D" parent="Decorations"]
+position = Vector2(1788, -168)
+script = ExtResource("8_c6dgk")
+rock_hit_particles = ExtResource("9_imv33")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decorations/rock_barrier"]
+position = Vector2(6, -25)
+shape = SubResource("CircleShape2D_fchpy")
+
+[node name="rock_hit_particles" parent="Decorations/rock_barrier" instance=ExtResource("9_imv33")]
+
+[node name="rock1" type="Sprite2D" parent="Decorations/rock_barrier"]
+position = Vector2(0, -51.75)
+scale = Vector2(9.5, 9.5)
+texture = ExtResource("8_gxh4g")
+
+[node name="rock2" type="Sprite2D" parent="Decorations/rock_barrier"]
+position = Vector2(0.125, -30.5)
+scale = Vector2(5.08333, 5.08333)
+texture = ExtResource("9_kh63v")
 
 [node name="Player" parent="." instance=ExtResource("2_c122j")]
 position = Vector2(6, -129)
