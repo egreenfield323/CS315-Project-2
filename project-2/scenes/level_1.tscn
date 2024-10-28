@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://c7xreq8f24wtk"]
+[gd_scene load_steps=25 format=4 uid="uid://c7xreq8f24wtk"]
 
 [ext_resource type="TileSet" uid="uid://b0qtvicno0wrh" path="res://assets/tiles/tilesets/sprites.tres" id="1_iv5e1"]
 [ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="1_m6p2m"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://scripts/asset scripts/glasses.gd" id="10_fvmmr"]
 [ext_resource type="Texture2D" uid="uid://ljgbu1ss46hg" path="res://assets/objects/glasses.png" id="10_g3mrl"]
 [ext_resource type="PackedScene" uid="uid://1pvglm7lxmfb" path="res://scenes/enemies/skeleton_enemy.tscn" id="17_c07um"]
-[ext_resource type="Script" path="res://scripts/enemies/skeleton_enemy.gd" id="18_yieg4"]
 
 [sub_resource type="Animation" id="Animation_qf4e2"]
 length = 0.001
@@ -68,7 +67,7 @@ radius = 90.0056
 
 [sub_resource type="Curve2D" id="Curve2D_0h2h5"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 2437, -117, 0, 0, 0, 0, 2763, -116, 0, 0, 0, 0, 2438, -117)
+"points": PackedVector2Array(0, 0, 0, 0, 2340, -118, 0, 0, 0, 0, 2832, -118, 0, 0, 0, 0, 2340, -117)
 }
 point_count = 3
 
@@ -237,12 +236,12 @@ texture = ExtResource("10_g3mrl")
 curve = SubResource("Curve2D_0h2h5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="enemies/Path2D"]
-position = Vector2(2437, -117)
+position = Vector2(2340, -118)
 rotation = 0.00306748
+rotates = false
 
-[node name="skeleton_enemy" parent="enemies/Path2D/PathFollow2D" instance=ExtResource("17_c07um")]
-position = Vector2(-0.00613494, -1.99999)
-script = ExtResource("18_yieg4")
+[node name="skeleton_enemy2" parent="enemies/Path2D/PathFollow2D" instance=ExtResource("17_c07um")]
+position = Vector2(-0.0276073, -8.99996)
 
 [connection signal="body_entered" from="Decorations/Welcome_sign" to="Decorations/Welcome_sign" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/Welcome_sign" to="Decorations/Welcome_sign" method="_on_body_exited"]
