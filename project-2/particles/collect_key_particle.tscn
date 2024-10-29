@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqai7cksvucus"]
+[gd_scene load_steps=4 format=3 uid="uid://ddtk2u3upwyt1"]
 
 [sub_resource type="Gradient" id="Gradient_2wpex"]
-offsets = PackedFloat32Array(0.704918, 1)
-colors = PackedColorArray(0.635294, 0.572549, 0.454902, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.516393, 0.95082)
+colors = PackedColorArray(1, 0.958729, 0.349572, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ujgt6"]
 gradient = SubResource("Gradient_2wpex")
@@ -18,16 +18,19 @@ initial_velocity_max = 732.39
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = 220.43
 gravity = Vector3(0, 100, 0)
-scale_max = 15.0
-color = Color(0.706782, 0.67485, 0.627133, 1)
+scale_max = 5.0
+color = Color(1, 0.981821, 0.529891, 1)
 color_ramp = SubResource("GradientTexture1D_ujgt6")
 turbulence_enabled = true
+turbulence_influence_max = 0.594
 
-[node name="rock_hit_particles" type="GPUParticles2D"]
+[node name="collect_key_particle" type="GPUParticles2D"]
 emitting = false
-amount = 50
+amount = 500
 process_material = SubResource("ParticleProcessMaterial_p42pt")
-lifetime = 1.4
+lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
 randomness = 0.41
+trail_sections = 2
+trail_section_subdivisions = 2

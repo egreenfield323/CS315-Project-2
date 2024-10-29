@@ -2,7 +2,7 @@ extends StaticBody2D
 
 @export var speed = 0.1
 @onready var anim_tree = $AnimationTree
-@export var health = 1
+@export var health = 2
 
 var hitable = true
 var dead = false
@@ -19,9 +19,7 @@ func _process(delta: float) -> void:
 func follow_path(delta):
 	if !dead:
 		anim_tree['parameters/conditions/walk'] = true
-		
 		$"..".progress_ratio += delta * speed
-		
 		if $"..".progress_ratio > .5:
 			scale.x = left_scale
 		elif $"..".progress_ratio < .5:
@@ -34,5 +32,4 @@ func hit(amount: int):
 	health -= amount
 	if health == 0:
 		dead = true
-		print("skeleton died")
 		anim_tree['parameters/conditions/death'] = true

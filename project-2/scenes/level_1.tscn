@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://c7xreq8f24wtk"]
+[gd_scene load_steps=34 format=4 uid="uid://c7xreq8f24wtk"]
 
 [ext_resource type="TileSet" uid="uid://b0qtvicno0wrh" path="res://assets/tiles/tilesets/sprites.tres" id="1_iv5e1"]
 [ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="1_m6p2m"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cgus2245no0yn" path="res://assets/tiles/decorations/shop_anim.png" id="4_nt7a6"]
 [ext_resource type="Texture2D" uid="uid://b81n5hwi5ugee" path="res://assets/tiles/decorations/sign.png" id="5_bjaly"]
 [ext_resource type="Script" path="res://scripts/asset scripts/sign_area_2d.gd" id="5_psbrw"]
+[ext_resource type="PackedScene" uid="uid://ddtk2u3upwyt1" path="res://particles/collect_key_particle.tscn" id="6_fqcid"]
 [ext_resource type="FontFile" uid="uid://ojlelghld24q" path="res://assets/fonts/Arima-Regular.ttf" id="7_4lw73"]
 [ext_resource type="Script" path="res://scripts/asset scripts/rock_barrier.gd" id="8_c6dgk"]
 [ext_resource type="Texture2D" uid="uid://cl0cny68eqxyj" path="res://assets/tiles/decorations/rock_1.png" id="8_gxh4g"]
@@ -16,14 +17,17 @@
 [ext_resource type="Texture2D" uid="uid://bihottil14s6c" path="res://assets/tiles/decorations/rock_2.png" id="9_kh63v"]
 [ext_resource type="Script" path="res://scripts/asset scripts/glasses.gd" id="10_fvmmr"]
 [ext_resource type="Texture2D" uid="uid://ljgbu1ss46hg" path="res://assets/objects/glasses.png" id="10_g3mrl"]
+[ext_resource type="Script" path="res://scripts/asset scripts/shop.gd" id="13_tmcvy"]
 [ext_resource type="PackedScene" uid="uid://1pvglm7lxmfb" path="res://scenes/enemies/skeleton_enemy.tscn" id="17_c07um"]
+[ext_resource type="Texture2D" uid="uid://cnen43x7oufav" path="res://assets/objects/keys/Key 5/Key 5 - BRONZE - Spritesheet.png" id="18_4nrfr"]
+[ext_resource type="Script" path="res://scripts/asset scripts/key.gd" id="18_xemcm"]
 
 [sub_resource type="Animation" id="Animation_qf4e2"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("shop:frame")
+tracks/0/path = NodePath("shop/shop:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,7 +45,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("shop:frame")
+tracks/0/path = NodePath("shop/shop:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,13 +67,82 @@ size = Vector2(28, 40)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fchpy"]
 radius = 90.0056
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4x0sh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36uwt"]
+size = Vector2(102, 95)
 
 [sub_resource type="Curve2D" id="Curve2D_0h2h5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 2340, -118, 0, 0, 0, 0, 2832, -118, 0, 0, 0, 0, 2340, -117)
 }
 point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4x0sh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6gel"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_cw611"]
+resource_name = "key_spin"
+length = 1.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.8),
+"transitions": PackedFloat32Array(1, 0.732043, 1),
+"update": 0,
+"values": [Vector2(2828, -111.895), Vector2(2828, -117.42), Vector2(2828, -111.895)]
+}
+
+[sub_resource type="Animation" id="Animation_aoekl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2828, -111.895)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tj25c"]
+_data = {
+"RESET": SubResource("Animation_aoekl"),
+"key_spin": SubResource("Animation_cw611")
+}
 
 [node name="level1" type="Node2D"]
 
@@ -114,14 +187,9 @@ centered = false
 [node name="Particles" type="Node2D" parent="."]
 script = ExtResource("4_1deir")
 rock_hit_particle = ExtResource("9_imv33")
+collect_key_particle = ExtResource("6_fqcid")
 
 [node name="Decorations" type="Node2D" parent="."]
-
-[node name="shop" type="Sprite2D" parent="Decorations"]
-position = Vector2(386.265, -107)
-scale = Vector2(1.67347, 1.67347)
-texture = ExtResource("4_nt7a6")
-hframes = 6
 
 [node name="shop_animation" type="AnimationPlayer" parent="Decorations"]
 libraries = {
@@ -203,6 +271,34 @@ position = Vector2(0.125, -30.5)
 scale = Vector2(5.08333, 5.08333)
 texture = ExtResource("9_kh63v")
 
+[node name="shop" type="Area2D" parent="Decorations"]
+script = ExtResource("13_tmcvy")
+
+[node name="shop" type="Sprite2D" parent="Decorations/shop"]
+position = Vector2(386.265, -107)
+scale = Vector2(1.67347, 1.67347)
+texture = ExtResource("4_nt7a6")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decorations/shop"]
+position = Vector2(389, -47.5)
+shape = SubResource("RectangleShape2D_36uwt")
+
+[node name="Label" type="Label" parent="Decorations/shop"]
+visible = false
+offset_left = 323.0
+offset_top = -77.0
+offset_right = 1603.0
+offset_bottom = 83.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("7_4lw73")
+theme_override_font_sizes/font_size = 96
+text = "Press SPACE to turn in the key"
+
 [node name="Player" parent="." instance=ExtResource("2_c122j")]
 position = Vector2(6, -129)
 
@@ -218,18 +314,6 @@ tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD//wAAAQABAAAAAAAAAAAAAQACAAA
 tile_set = ExtResource("1_iv5e1")
 rendering_quadrant_size = 24
 
-[node name="Glasses" type="Area2D" parent="."]
-position = Vector2(182, -10)
-script = ExtResource("10_fvmmr")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Glasses"]
-shape = SubResource("CircleShape2D_4x0sh")
-
-[node name="Glasses" type="Sprite2D" parent="Glasses"]
-scale = Vector2(0.0083, 0.0083)
-texture = ExtResource("10_g3mrl")
-
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="Path2D" type="Path2D" parent="enemies"]
@@ -243,8 +327,43 @@ rotates = false
 [node name="skeleton_enemy2" parent="enemies/Path2D/PathFollow2D" instance=ExtResource("17_c07um")]
 position = Vector2(-0.0276073, -8.99996)
 
+[node name="interactables" type="Node2D" parent="."]
+
+[node name="Glasses" type="Area2D" parent="interactables"]
+position = Vector2(182, -10)
+script = ExtResource("10_fvmmr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactables/Glasses"]
+shape = SubResource("CircleShape2D_4x0sh")
+
+[node name="Glasses" type="Sprite2D" parent="interactables/Glasses"]
+scale = Vector2(0.0083, 0.0083)
+texture = ExtResource("10_g3mrl")
+
+[node name="key" type="Area2D" parent="interactables"]
+position = Vector2(2828, -111.895)
+script = ExtResource("18_xemcm")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactables/key"]
+shape = SubResource("CapsuleShape2D_p6gel")
+
+[node name="Sprite2D" type="Sprite2D" parent="interactables/key"]
+texture = ExtResource("18_4nrfr")
+hframes = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="interactables/key"]
+libraries = {
+"": SubResource("AnimationLibrary_tj25c")
+}
+autoplay = "key_spin"
+
 [connection signal="body_entered" from="Decorations/Welcome_sign" to="Decorations/Welcome_sign" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/Welcome_sign" to="Decorations/Welcome_sign" method="_on_body_exited"]
 [connection signal="body_entered" from="Decorations/Jump_sign" to="Decorations/Jump_sign" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/Jump_sign" to="Decorations/Jump_sign" method="_on_body_exited"]
-[connection signal="body_entered" from="Glasses" to="Glasses" method="_on_body_entered"]
+[connection signal="body_entered" from="Decorations/shop" to="Decorations/shop" method="_on_body_entered"]
+[connection signal="body_exited" from="Decorations/shop" to="Decorations/shop" method="_on_body_exited"]
+[connection signal="body_entered" from="interactables/Glasses" to="interactables/Glasses" method="_on_body_entered"]
+[connection signal="body_entered" from="interactables/key" to="interactables/key" method="_on_body_entered"]

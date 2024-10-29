@@ -1,9 +1,11 @@
 extends Node2D
 
 @export var rock_hit_particle: Resource
+@export var collect_key_particle: Resource
 
 var particle_names = [
-	"rock_hit_particle"
+	"rock_hit_particle",
+	"collect_key_particle"
 ]
 
 func play_particle(name: String, position: Vector2):
@@ -11,6 +13,11 @@ func play_particle(name: String, position: Vector2):
 	if particle_names.has(name):
 		if (name == "rock_hit_particle"):
 			particle = rock_hit_particle.instantiate()
+			particle.position = position
+			add_child(particle)
+			_emit(particle)
+		elif (name == "collect_key_particle"):
+			particle = collect_key_particle.instantiate()
 			particle.position = position
 			add_child(particle)
 			_emit(particle)

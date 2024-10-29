@@ -14,6 +14,8 @@ var has_glasses = false
 
 var has_died = false
 
+@export var has_lvl1_key = false
+
 func _physics_process(delta: float) -> void:
 	if !has_died:
 		# Add the gravity.
