@@ -10,11 +10,8 @@ const JUMP_VELOCITY = -300.0
 
 var facing = 1
 
-var has_glasses = false
-
-var has_died = false
-
-@export var has_lvl1_key = false
+@onready var has_died = $"..".has_died
+@onready var has_glasses = $"..".has_glasses
 
 func _physics_process(delta: float) -> void:
 	if !has_died:

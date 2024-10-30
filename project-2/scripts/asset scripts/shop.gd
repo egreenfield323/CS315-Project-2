@@ -1,11 +1,10 @@
 extends Area2D
 
 var standing_in_zone = false
-var ended_level = false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		if body.has_lvl1_key:
+		if $"../..".has_lvl1_key:
 			$Label.visible = true
 			standing_in_zone = true
 	pass
@@ -23,6 +22,6 @@ func _process(_delta):
 			
 
 func _end_level():
-	if !ended_level:
-		ended_level = true
+	if !$"../..".ended_level:
+		$"../..".ended_level = true
 		$"../../Particles".play_particle("collect_key_particle", $"../../Player".position)

@@ -1,0 +1,282 @@
+[gd_scene load_steps=26 format=4 uid="uid://dbbgclgt8ijpn"]
+
+[ext_resource type="Script" path="res://scripts/level_2.gd" id="1_rr1fl"]
+[ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="2_g36nv"]
+[ext_resource type="Texture2D" uid="uid://c642wy6gyiit4" path="res://assets/tiles/background/background_layer_2.png" id="3_3jl1n"]
+[ext_resource type="Texture2D" uid="uid://bwwjshjgxbacp" path="res://assets/tiles/background/background_layer_3.png" id="4_baxej"]
+[ext_resource type="Script" path="res://scripts/particles.gd" id="5_rgap8"]
+[ext_resource type="PackedScene" uid="uid://bqai7cksvucus" path="res://particles/rock_hit_particles.tscn" id="6_ultyf"]
+[ext_resource type="PackedScene" uid="uid://ddtk2u3upwyt1" path="res://particles/collect_key_particle.tscn" id="7_whn0y"]
+[ext_resource type="FontFile" uid="uid://ojlelghld24q" path="res://assets/fonts/Arima-Regular.ttf" id="8_5aowf"]
+[ext_resource type="Script" path="res://scripts/asset scripts/sign_area_2d.gd" id="9_sekgd"]
+[ext_resource type="Texture2D" uid="uid://b81n5hwi5ugee" path="res://assets/tiles/decorations/sign.png" id="10_cma5v"]
+[ext_resource type="Texture2D" uid="uid://c1ri0gtdj65t0" path="res://assets/tiles/decorations/lamp.png" id="11_0mnwx"]
+[ext_resource type="Texture2D" uid="uid://c6onw7bf11rpl" path="res://assets/gui/GUI.png" id="13_b4lbe"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="13_sykwm"]
+[ext_resource type="Script" path="res://scripts/asset scripts/key2.gd" id="14_jhhct"]
+[ext_resource type="Texture2D" uid="uid://b56i4pguvl3j5" path="res://assets/objects/keys/Key 5/Key 5 - SILVER - Spritesheet.png" id="15_sausg"]
+[ext_resource type="PackedScene" uid="uid://cxwy8hon44nke" path="res://scenes/player.tscn" id="16_y5jdj"]
+[ext_resource type="TileSet" uid="uid://b0qtvicno0wrh" path="res://assets/tiles/tilesets/sprites.tres" id="17_xgywd"]
+[ext_resource type="PackedScene" uid="uid://1pvglm7lxmfb" path="res://scenes/enemies/skeleton_enemy.tscn" id="18_xflxr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wwl5"]
+size = Vector2(28, 40)
+
+[sub_resource type="Curve2D" id="Curve2D_ivyhb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1103, -137, 0, 0, 0, 0, 1167, -137, 0, 0, 0, 0, 1103, -137)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_jb551"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1083, -145, 0, 0, 0, 0, 1390, -143, 0, 0, 0, 0, 1083, -145)
+}
+point_count = 3
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6gel"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_2qjrt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1374, -42)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_u4u3t"]
+resource_name = "key2_move"
+length = 1.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1374, -42), Vector2(1374, -51.26), Vector2(1374, -42)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rujod"]
+_data = {
+"RESET": SubResource("Animation_2qjrt"),
+"key2_move": SubResource("Animation_u4u3t")
+}
+
+[node name="level2" type="Node2D"]
+script = ExtResource("1_rr1fl")
+
+[node name="Parallax" type="Node2D" parent="."]
+
+[node name="ParallaxLayer1" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.2, 0)
+scroll_offset = Vector2(75, 160)
+repeat_size = Vector2(584.885, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxLayer1"]
+texture_repeat = 1
+scale = Vector2(1.82778, 1.82778)
+texture = ExtResource("2_g36nv")
+centered = false
+
+[node name="ParallaxLayer2" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.3, 0)
+scroll_offset = Vector2(75, 160)
+repeat_size = Vector2(584.885, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxLayer2"]
+texture_repeat = 1
+scale = Vector2(1.82778, 1.82778)
+texture = ExtResource("3_3jl1n")
+centered = false
+
+[node name="ParallaxLayer3" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.4, 0)
+scroll_offset = Vector2(75, 160)
+repeat_size = Vector2(584.885, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxLayer3"]
+texture_repeat = 1
+scale = Vector2(1.82778, 1.82778)
+texture = ExtResource("4_baxej")
+centered = false
+
+[node name="Particles" type="Node2D" parent="."]
+script = ExtResource("5_rgap8")
+rock_hit_particle = ExtResource("6_ultyf")
+collect_key_particle = ExtResource("7_whn0y")
+
+[node name="Directions" type="Node2D" parent="."]
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Jump_sign2" type="Area2D" parent="Decorations"]
+position = Vector2(101, -20)
+script = ExtResource("9_sekgd")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decorations/Jump_sign2"]
+shape = SubResource("RectangleShape2D_0wwl5")
+
+[node name="Sign" type="Sprite2D" parent="Decorations/Jump_sign2"]
+scale = Vector2(1.31818, 1.31818)
+texture = ExtResource("10_cma5v")
+
+[node name="Label" type="Label" parent="Decorations/Jump_sign2"]
+visible = false
+offset_left = -75.0
+offset_top = -73.0
+offset_right = 13529.0
+offset_bottom = 3193.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("8_5aowf")
+theme_override_font_sizes/font_size = 40
+text = "Press SPACE to attack"
+
+[node name="Lamp" type="Sprite2D" parent="Decorations"]
+position = Vector2(165.25, -54.4022)
+scale = Vector2(1.8913, 1.8913)
+texture = ExtResource("11_0mnwx")
+
+[node name="Player" parent="." instance=ExtResource("16_y5jdj")]
+position = Vector2(0, -125)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(50, -15)
+zoom = Vector2(2, 2)
+limit_bottom = 110
+limit_smoothed = true
+position_smoothing_speed = 500.0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD+/wEAAQAAAAEAAAD+/wIAAQAAAAIAAAD+/wMAAQAAAAMAAAD//wEAAQABAAEAAAD//wMAAQABAAMAAAAAAAMAAQACAAMAAAAAAAEAAQABAAEAAAAAAAIAAQABAAEAAAD//wIAAQABAAEAAAABAAEAAQABAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAACAAEAAQABAAEAAAADAAEAAQABAAEAAAADAAIAAQABAAEAAAAEAAIAAQABAAEAAAAFAAIAAQABAAEAAAAGAAIAAQABAAEAAAAHAAIAAQABAAEAAAAIAAIAAQABAAEAAAAJAAIAAQABAAEAAAAKAAIAAQABAAEAAAALAAIAAQABAAEAAAAMAAIAAQABAAEAAAANAAIAAQABAAEAAAAOAAIAAQABAAEAAAAPAAIAAQABAAEAAAAQAAIAAQABAAEAAAARAAIAAQABAAEAAAASAAIAAQABAAEAAAATAAIAAQABAAEAAAAUAAIAAQABAAEAAAAVAAIAAQABAAEAAAAVAAEAAQABAAEAAAAUAAEAAQABAAEAAAATAAEAAQABAAEAAAASAAEAAQABAAEAAAARAAEAAQABAAEAAAAQAAEAAQABAAEAAAAPAAEAAQABAAEAAAAOAAEAAQABAAEAAAANAAEAAQABAAEAAAAMAAEAAQABAAEAAAALAAEAAQABAAEAAAAKAAEAAQABAAEAAAAJAAEAAQABAAEAAAAIAAEAAQABAAEAAAAHAAEAAQABAAEAAAAGAAEAAQABAAEAAAAFAAEAAQABAAEAAAAEAAEAAQABAAEAAAABAAMAAQABAAMAAAACAAMAAQACAAMAAAADAAMAAQABAAMAAAAEAAMAAQACAAMAAAAFAAMAAQABAAMAAAAGAAMAAQACAAMAAAAHAAMAAQABAAMAAAAIAAMAAQACAAMAAAAJAAMAAQABAAMAAAAKAAMAAQACAAMAAAALAAMAAQABAAMAAAAMAAMAAQACAAMAAAANAAMAAQABAAMAAAAOAAMAAQACAAMAAAAPAAMAAQABAAMAAAAQAAMAAQACAAMAAAARAAMAAQABAAMAAAASAAMAAQACAAMAAAATAAMAAQABAAMAAAAUAAMAAQACAAMAAAAVAAMAAQABAAMAAAAWAAEAAQABAAEAAAAWAAIAAQABAAEAAAAWAAMAAQABAAMAAAAXAAIAAQADAAIAAAAXAAMAAQADAAMAAAD+/wAAAQAFAAAAAAD//wAAAQAGAAAAAAAAAAAAAQAHAAAAAAAVAAAAAQAGAAAAAAATAAAAAQAGAAAAAAAUAAAAAQAHAAAAAAARAAAAAQAGAAAAAAASAAAAAQAHAAAAAAAPAAAAAQAGAAAAAAAQAAAAAQAHAAAAAAANAAAAAQAGAAAAAAAOAAAAAQAHAAAAAAALAAAAAQAGAAAAAAAMAAAAAQAHAAAAAAAJAAAAAQAGAAAAAAAKAAAAAQAHAAAAAAAHAAAAAQAHAAAAAAAIAAAAAQAHAAAAAAAFAAAAAQAGAAAAAAAGAAAAAQAGAAAAAAADAAAAAQAGAAAAAAAEAAAAAQAHAAAAAAABAAAAAQAGAAAAAAACAAAAAQAHAAAAAAAaAAIAAQAFAAAAAAAeAAIAAQAFAAAAAAAbAAIAAQAIAAAAAAAfAAIAAQAIAAAAAAAaAAMAAQAAAAIAAAAaAAQAAQAAAAMAAAAeAAMAAQAAAAIAAAAeAAQAAQAAAAMAAAAbAAMAAQADAAIAAAAbAAQAAQADAAMAAAAfAAMAAQADAAIAAAAfAAQAAQADAAMAAAAjAAIAAQAFAAAAAAAkAAIAAQAIAAAAAAAsAP//AQAFAAAAAAAtAP//AQAGAAAAAAAuAP//AQAHAAAAAAAvAP//AQAGAAAAAAAwAP//AQAHAAAAAAAxAP//AQAIAAAAAAAnAAEAAQAFAAAAAAApAAAAAQAIAAAAAAAoAAAAAQAFAAAAAAAoAAEAAQABAAEAAAApAAEAAQADAAIAAAAkAAMAAQADAAIAAAAoAAIAAQABAAEAAAAjAAMAAQAAAAIAAAAjAAQAAQAAAAMAAAAkAAQAAQADAAMAAAAnAAIAAQAAAAIAAAAnAAMAAQAAAAIAAAApAAIAAQADAAIAAAApAAMAAQADAAIAAAApAAQAAQADAAMAAAAnAAQAAQAAAAMAAAAoAAQAAQABAAMAAAAoAAMAAQABAAEAAAAXAAEAAQAIAAAAAAAWAAAAAQAIAAAAAAA0AP//AQAFAAAAAAA1AP//AQAGAAAAAAA2AP//AQAHAAAAAAA3AP//AQAGAAAAAAA4AP//AQAHAAAAAAA5AP//AQAIAAAAAAA5AAAAAQADAAEAAAA5AAEAAQADAAIAAAA5AAIAAQADAAEAAAA5AAMAAQADAAIAAAAxAAAAAQADAAEAAAAxAAEAAQADAAIAAAAxAAIAAQADAAEAAAAxAAMAAQADAAIAAAAsAAAAAQAAAAEAAAAsAAEAAQAAAAIAAAAsAAIAAQAAAAEAAAAsAAMAAQAAAAIAAAA0AAAAAQAAAAEAAAA0AAEAAQAAAAIAAAA0AAIAAQAAAAEAAAA0AAMAAQAAAAIAAAAsAAQAAQAAAAMAAAAtAAQAAQABAAMAAAAuAAQAAQACAAMAAAA0AAQAAQAAAAMAAAA1AAQAAQABAAMAAAA2AAQAAQACAAMAAAAxAAQAAQADAAMAAAA5AAQAAQADAAMAAAAvAAQAAQABAAMAAAAwAAQAAQACAAMAAAA3AAQAAQABAAMAAAA4AAQAAQACAAMAAAAtAAAAAQABAAEAAAAuAAAAAQABAAEAAAAvAAAAAQABAAEAAAAwAAAAAQABAAEAAAAwAAEAAQABAAEAAAAvAAEAAQABAAEAAAAuAAEAAQABAAEAAAAtAAEAAQABAAEAAAAtAAIAAQABAAEAAAAuAAIAAQABAAEAAAAvAAIAAQABAAEAAAAwAAIAAQABAAEAAAAwAAMAAQABAAEAAAAvAAMAAQABAAEAAAAuAAMAAQABAAEAAAAtAAMAAQABAAEAAAA1AAAAAQABAAEAAAA1AAEAAQABAAEAAAA1AAIAAQABAAEAAAA1AAMAAQABAAEAAAA2AAMAAQABAAEAAAA3AAMAAQABAAEAAAA4AAMAAQABAAEAAAA4AAIAAQABAAEAAAA4AAEAAQABAAEAAAA4AAAAAQABAAEAAAA3AAAAAQABAAEAAAA2AAAAAQABAAEAAAA2AAEAAQABAAEAAAA2AAIAAQABAAEAAAA3AAIAAQABAAEAAAA3AAEAAQABAAEAAAAeAP3/AQAFAAAAAAAjAPz/AQAFAAAAAAAoAPv/AQAFAAAAAAAfAP3/AQAIAAAAAAAkAPz/AQAIAAAAAAApAPv/AQAIAAAAAAAtAPv/AQAFAAAAAAAuAPv/AQAGAAAAAAAvAPv/AQAHAAAAAAAwAPv/AQAIAAAAAAAaAP7/AQAFAAAAAAAbAP7/AQAIAAAAAAA=")
+tile_set = ExtResource("17_xgywd")
+rendering_quadrant_size = 24
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="skeleton1" type="Node2D" parent="enemies"]
+
+[node name="Path2D" type="Path2D" parent="enemies/skeleton1"]
+curve = SubResource("Curve2D_ivyhb")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="enemies/skeleton1/Path2D"]
+position = Vector2(1103, -137)
+rotates = false
+
+[node name="skeleton_enemy2" parent="enemies/skeleton1/Path2D/PathFollow2D" instance=ExtResource("18_xflxr")]
+position = Vector2(7, -11)
+rotation = 0.00306748
+scale = Vector2(0.921796, 0.921796)
+
+[node name="skeleton2" type="Node2D" parent="enemies"]
+position = Vector2(-860, 120)
+
+[node name="Path2D" type="Path2D" parent="enemies/skeleton2"]
+curve = SubResource("Curve2D_jb551")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="enemies/skeleton2/Path2D"]
+position = Vector2(1083, -145)
+rotation = 0.00651457
+rotates = false
+
+[node name="skeleton_enemy2" parent="enemies/skeleton2/Path2D/PathFollow2D" instance=ExtResource("18_xflxr")]
+position = Vector2(-0.0195465, -2.99994)
+rotation = 0.00306748
+scale = Vector2(0.921796, 0.921796)
+
+[node name="interactables" type="Node2D" parent="."]
+
+[node name="key" type="Area2D" parent="interactables"]
+position = Vector2(1374, -42)
+script = ExtResource("14_jhhct")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactables/key"]
+shape = SubResource("CapsuleShape2D_p6gel")
+
+[node name="Sprite2D" type="Sprite2D" parent="interactables/key"]
+texture = ExtResource("15_sausg")
+hframes = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="interactables/key"]
+libraries = {
+"": SubResource("AnimationLibrary_rujod")
+}
+autoplay = "key2_move"
+
+[node name="GUI" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+script = ExtResource("13_sykwm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.5
+offset_top = -143.0
+offset_right = -85.5
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.999998, 0.999998)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/VBoxContainer"]
+texture = ExtResource("13_b4lbe")
+region_enabled = true
+region_rect = Rect2(134.699, 20.0724, 52.5616, 6.98891)
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI/VBoxContainer"]
+position = Vector2(-0.475, 0)
+texture = ExtResource("13_b4lbe")
+region_enabled = true
+region_rect = Rect2(71.9248, 21.9361, 49.1222, 3.00847)
+
+[connection signal="body_entered" from="Decorations/Jump_sign2" to="Decorations/Jump_sign2" method="_on_body_entered"]
+[connection signal="body_exited" from="Decorations/Jump_sign2" to="Decorations/Jump_sign2" method="_on_body_exited"]
+[connection signal="body_entered" from="interactables/key" to="interactables/key" method="_on_body_entered"]

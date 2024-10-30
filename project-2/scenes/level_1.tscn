@@ -1,5 +1,6 @@
-[gd_scene load_steps=34 format=4 uid="uid://c7xreq8f24wtk"]
+[gd_scene load_steps=38 format=4 uid="uid://c7xreq8f24wtk"]
 
+[ext_resource type="Script" path="res://scripts/level_1.gd" id="1_0sa10"]
 [ext_resource type="TileSet" uid="uid://b0qtvicno0wrh" path="res://assets/tiles/tilesets/sprites.tres" id="1_iv5e1"]
 [ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="1_m6p2m"]
 [ext_resource type="PackedScene" uid="uid://cxwy8hon44nke" path="res://scenes/player.tscn" id="2_c122j"]
@@ -20,7 +21,12 @@
 [ext_resource type="Script" path="res://scripts/asset scripts/shop.gd" id="13_tmcvy"]
 [ext_resource type="PackedScene" uid="uid://1pvglm7lxmfb" path="res://scenes/enemies/skeleton_enemy.tscn" id="17_c07um"]
 [ext_resource type="Texture2D" uid="uid://cnen43x7oufav" path="res://assets/objects/keys/Key 5/Key 5 - BRONZE - Spritesheet.png" id="18_4nrfr"]
-[ext_resource type="Script" path="res://scripts/asset scripts/key.gd" id="18_xemcm"]
+[ext_resource type="Script" path="res://scripts/asset scripts/key1.gd" id="18_xemcm"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="23_sov5n"]
+[ext_resource type="Texture2D" uid="uid://c6onw7bf11rpl" path="res://assets/gui/GUI.png" id="24_3nhjt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjt15"]
+size = Vector2(319, 128)
 
 [sub_resource type="Animation" id="Animation_qf4e2"]
 length = 0.001
@@ -81,6 +87,33 @@ point_count = 3
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6gel"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_aoekl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2828, -111.895)]
+}
+
 [sub_resource type="Animation" id="Animation_cw611"]
 resource_name = "key_spin"
 length = 1.8
@@ -111,33 +144,6 @@ tracks/1/keys = {
 "values": [Vector2(2828, -111.895), Vector2(2828, -117.42), Vector2(2828, -111.895)]
 }
 
-[sub_resource type="Animation" id="Animation_aoekl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2828, -111.895)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tj25c"]
 _data = {
 "RESET": SubResource("Animation_aoekl"),
@@ -145,6 +151,7 @@ _data = {
 }
 
 [node name="level1" type="Node2D"]
+script = ExtResource("1_0sa10")
 
 [node name="Parallax" type="Node2D" parent="."]
 
@@ -189,6 +196,29 @@ script = ExtResource("4_1deir")
 rock_hit_particle = ExtResource("9_imv33")
 collect_key_particle = ExtResource("6_fqcid")
 
+[node name="Directions" type="Node2D" parent="."]
+
+[node name="return_key" type="Area2D" parent="Directions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/return_key"]
+position = Vector2(2591.5, -160)
+shape = SubResource("RectangleShape2D_mjt15")
+
+[node name="Label" type="Label" parent="Directions/return_key"]
+visible = false
+offset_left = 2503.0
+offset_top = -202.0
+offset_right = 3090.0
+offset_bottom = -120.0
+scale = Vector2(0.28, 0.28)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("7_4lw73")
+theme_override_font_sizes/font_size = 50
+text = "Return the key to the store"
+
 [node name="Decorations" type="Node2D" parent="."]
 
 [node name="shop_animation" type="AnimationPlayer" parent="Decorations"]
@@ -210,17 +240,17 @@ texture = ExtResource("5_bjaly")
 
 [node name="Label" type="Label" parent="Decorations/Welcome_sign"]
 visible = false
-offset_left = -95.0
-offset_top = -141.0
-offset_right = 8783.0
-offset_bottom = 3125.0
+offset_left = -41.0
+offset_top = -92.0
+offset_right = 8837.0
+offset_bottom = 3174.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 20
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("7_4lw73")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 40
 text = "Welcome"
 
 [node name="Jump_sign" type="Area2D" parent="Decorations"]
@@ -236,18 +266,44 @@ texture = ExtResource("5_bjaly")
 
 [node name="Label" type="Label" parent="Decorations/Jump_sign"]
 visible = false
-offset_left = -132.0
-offset_top = -120.0
-offset_right = 13472.0
-offset_bottom = 3146.0
+offset_left = -54.0
+offset_top = -73.0
+offset_right = 13550.0
+offset_bottom = 3193.0
 scale = Vector2(0.4, 0.4)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = -5
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("7_4lw73")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 40
 text = "Press ^ to jump"
+
+[node name="attack_sign" type="Area2D" parent="Decorations"]
+position = Vector2(1628, -188)
+script = ExtResource("5_psbrw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decorations/attack_sign"]
+shape = SubResource("RectangleShape2D_0wwl5")
+
+[node name="Sign" type="Sprite2D" parent="Decorations/attack_sign"]
+scale = Vector2(1.31818, 1.31818)
+texture = ExtResource("5_bjaly")
+
+[node name="Label" type="Label" parent="Decorations/attack_sign"]
+visible = false
+offset_left = -75.0
+offset_top = -73.0
+offset_right = 13529.0
+offset_bottom = 3193.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("7_4lw73")
+theme_override_font_sizes/font_size = 40
+text = "Press SPACE to attack"
 
 [node name="rock_barrier" type="StaticBody2D" parent="Decorations"]
 position = Vector2(1788, -168)
@@ -286,17 +342,17 @@ shape = SubResource("RectangleShape2D_36uwt")
 
 [node name="Label" type="Label" parent="Decorations/shop"]
 visible = false
-offset_left = 323.0
-offset_top = -77.0
-offset_right = 1603.0
-offset_bottom = 83.0
-scale = Vector2(0.1, 0.1)
+offset_left = 245.0
+offset_top = -108.0
+offset_right = 1571.0
+offset_bottom = 56.0
+scale = Vector2(0.22, 0.22)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("7_4lw73")
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 100
 text = "Press SPACE to turn in the key"
 
 [node name="Player" parent="." instance=ExtResource("2_c122j")]
@@ -359,10 +415,42 @@ libraries = {
 }
 autoplay = "key_spin"
 
+[node name="GUI" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+script = ExtResource("23_sov5n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.5
+offset_top = -143.0
+offset_right = -85.5
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.999998, 0.999998)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/VBoxContainer"]
+texture = ExtResource("24_3nhjt")
+region_enabled = true
+region_rect = Rect2(134.699, 20.0724, 52.5616, 6.98891)
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI/VBoxContainer"]
+position = Vector2(-0.475, 0)
+texture = ExtResource("24_3nhjt")
+region_enabled = true
+region_rect = Rect2(71.9248, 21.9361, 49.1222, 3.00847)
+
+[connection signal="body_entered" from="Directions/return_key" to="." method="_on_return_key_body_entered"]
+[connection signal="body_exited" from="Directions/return_key" to="." method="_on_return_key_body_exited"]
 [connection signal="body_entered" from="Decorations/Welcome_sign" to="Decorations/Welcome_sign" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/Welcome_sign" to="Decorations/Welcome_sign" method="_on_body_exited"]
 [connection signal="body_entered" from="Decorations/Jump_sign" to="Decorations/Jump_sign" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/Jump_sign" to="Decorations/Jump_sign" method="_on_body_exited"]
+[connection signal="body_entered" from="Decorations/attack_sign" to="Decorations/attack_sign" method="_on_body_entered"]
+[connection signal="body_exited" from="Decorations/attack_sign" to="Decorations/attack_sign" method="_on_body_exited"]
 [connection signal="body_entered" from="Decorations/shop" to="Decorations/shop" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/shop" to="Decorations/shop" method="_on_body_exited"]
 [connection signal="body_entered" from="interactables/Glasses" to="interactables/Glasses" method="_on_body_entered"]
