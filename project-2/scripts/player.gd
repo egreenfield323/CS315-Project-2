@@ -73,6 +73,6 @@ func hit():
 		await get_tree().create_timer(0.3).timeout
 		anim_tree['parameters/conditions/hit'] = false
 	else:
-		has_died = true
+		$"..".has_died = true
 		anim_tree['parameters/conditions/death'] = true
 		velocity = Vector2.ZERO

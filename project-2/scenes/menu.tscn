@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://dna5k8i61dim3"]
+
+[ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="1_ycayh"]
+[ext_resource type="Texture2D" uid="uid://c642wy6gyiit4" path="res://assets/tiles/background/background_layer_2.png" id="2_kxs5e"]
+[ext_resource type="Texture2D" uid="uid://bwwjshjgxbacp" path="res://assets/tiles/background/background_layer_3.png" id="3_3gopu"]
+[ext_resource type="FontFile" uid="uid://ojlelghld24q" path="res://assets/fonts/Arima-Regular.ttf" id="4_ky212"]
+[ext_resource type="Texture2D" uid="uid://bygax2nmptebw" path="res://assets/objects/buttons/play01.png" id="5_q05xv"]
+[ext_resource type="Texture2D" uid="uid://b8k4idju3guly" path="res://assets/objects/buttons/play03.png" id="6_p0d8j"]
+[ext_resource type="Texture2D" uid="uid://weurirfrc3wh" path="res://assets/objects/buttons/play02.png" id="7_oybxn"]
+[ext_resource type="Script" path="res://scripts/play_button.gd" id="8_j7uy2"]
+
+[node name="menu" type="Node2D"]
+
+[node name="Parallax" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="ParallaxLayer1" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.2, 0)
+scroll_offset = Vector2(75, 160)
+repeat_size = Vector2(584.885, 0)
+autoscroll = Vector2(1, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxLayer1"]
+texture_repeat = 1
+scale = Vector2(1.82778, 1.82778)
+texture = ExtResource("1_ycayh")
+centered = false
+
+[node name="ParallaxLayer2" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.3, 0)
+scroll_offset = Vector2(75, 160)
+repeat_size = Vector2(584.885, 0)
+autoscroll = Vector2(2, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxLayer2"]
+texture_repeat = 1
+scale = Vector2(1.82778, 1.82778)
+texture = ExtResource("2_kxs5e")
+centered = false
+
+[node name="ParallaxLayer3" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.4, 0)
+scroll_offset = Vector2(75, 160)
+repeat_size = Vector2(584.885, 0)
+autoscroll = Vector2(3, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ParallaxLayer3"]
+texture_repeat = 1
+scale = Vector2(1.82778, 1.82778)
+texture = ExtResource("3_3gopu")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -380.0
+offset_top = -213.135
+offset_right = 3506.0
+offset_bottom = 603.865
+scale = Vector2(0.2, 0.2)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 30
+theme_override_constants/shadow_outline_size = 100
+theme_override_fonts/font = ExtResource("4_ky212")
+theme_override_font_sizes/font_size = 500
+text = "Evan's Platformer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = 32.0
+offset_right = 585.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.52, 0.52)
+texture_normal = ExtResource("5_q05xv")
+texture_pressed = ExtResource("6_p0d8j")
+texture_hover = ExtResource("7_oybxn")
+script = ExtResource("8_j7uy2")
+
+[connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]

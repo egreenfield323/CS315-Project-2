@@ -4,7 +4,7 @@ var standing_in_zone = false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		if $"../..".has_lvl1_key: 
+		if $"../..".has_lvl2_key:
 			$Label.visible = true
 			standing_in_zone = true
 	pass

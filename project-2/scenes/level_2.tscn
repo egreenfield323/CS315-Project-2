@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dbbgclgt8ijpn"]
+[gd_scene load_steps=34 format=4 uid="uid://dbbgclgt8ijpn"]
 
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_rr1fl"]
 [ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="2_g36nv"]
@@ -11,16 +11,61 @@
 [ext_resource type="Script" path="res://scripts/asset scripts/sign_area_2d.gd" id="9_sekgd"]
 [ext_resource type="Texture2D" uid="uid://b81n5hwi5ugee" path="res://assets/tiles/decorations/sign.png" id="10_cma5v"]
 [ext_resource type="Texture2D" uid="uid://c1ri0gtdj65t0" path="res://assets/tiles/decorations/lamp.png" id="11_0mnwx"]
+[ext_resource type="Script" path="res://scripts/asset scripts/shop2.gd" id="12_vx6hy"]
 [ext_resource type="Texture2D" uid="uid://c6onw7bf11rpl" path="res://assets/gui/GUI.png" id="13_b4lbe"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="13_sykwm"]
+[ext_resource type="Texture2D" uid="uid://cgus2245no0yn" path="res://assets/tiles/decorations/shop_anim.png" id="13_t4x17"]
 [ext_resource type="Script" path="res://scripts/asset scripts/key2.gd" id="14_jhhct"]
 [ext_resource type="Texture2D" uid="uid://b56i4pguvl3j5" path="res://assets/objects/keys/Key 5/Key 5 - SILVER - Spritesheet.png" id="15_sausg"]
 [ext_resource type="PackedScene" uid="uid://cxwy8hon44nke" path="res://scenes/player.tscn" id="16_y5jdj"]
 [ext_resource type="TileSet" uid="uid://b0qtvicno0wrh" path="res://assets/tiles/tilesets/sprites.tres" id="17_xgywd"]
 [ext_resource type="PackedScene" uid="uid://1pvglm7lxmfb" path="res://scenes/enemies/skeleton_enemy.tscn" id="18_xflxr"]
+[ext_resource type="Script" path="res://scripts/world_border.gd" id="19_32j42"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wwl5"]
 size = Vector2(28, 40)
+
+[sub_resource type="Animation" id="Animation_qf4e2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shop/shop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ojdv7"]
+resource_name = "shop_animation"
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shop/shop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vk1a4"]
+_data = {
+"RESET": SubResource("Animation_qf4e2"),
+"shop_animation": SubResource("Animation_ojdv7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gkww"]
+size = Vector2(102, 95)
 
 [sub_resource type="Curve2D" id="Curve2D_ivyhb"]
 _data = {
@@ -99,6 +144,9 @@ _data = {
 "RESET": SubResource("Animation_2qjrt"),
 "key2_move": SubResource("Animation_u4u3t")
 }
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ic0k6"]
+distance = -155.0
 
 [node name="level2" type="Node2D"]
 script = ExtResource("1_rr1fl")
@@ -182,10 +230,44 @@ position = Vector2(165.25, -54.4022)
 scale = Vector2(1.8913, 1.8913)
 texture = ExtResource("11_0mnwx")
 
-[node name="Player" parent="." instance=ExtResource("16_y5jdj")]
-position = Vector2(0, -125)
+[node name="shop_animation" type="AnimationPlayer" parent="Decorations"]
+libraries = {
+"": SubResource("AnimationLibrary_vk1a4")
+}
+autoplay = "shop_animation"
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="shop" type="Area2D" parent="Decorations"]
+script = ExtResource("12_vx6hy")
+
+[node name="shop" type="Sprite2D" parent="Decorations/shop"]
+position = Vector2(386.265, -107)
+scale = Vector2(1.67347, 1.67347)
+texture = ExtResource("13_t4x17")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decorations/shop"]
+position = Vector2(389, -47.5)
+shape = SubResource("RectangleShape2D_1gkww")
+
+[node name="Label" type="Label" parent="Decorations/shop"]
+visible = false
+offset_left = 245.0
+offset_top = -108.0
+offset_right = 1571.0
+offset_bottom = 56.0
+scale = Vector2(0.22, 0.22)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("8_5aowf")
+theme_override_font_sizes/font_size = 100
+text = "Press SPACE to turn in the key"
+
+[node name="Player" parent="." instance=ExtResource("16_y5jdj")]
+position = Vector2(10, -110)
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
 offset = Vector2(50, -15)
 zoom = Vector2(2, 2)
 limit_bottom = 110
@@ -277,6 +359,15 @@ texture = ExtResource("13_b4lbe")
 region_enabled = true
 region_rect = Rect2(71.9248, 21.9361, 49.1222, 3.00847)
 
+[node name="world_border" type="Area2D" parent="."]
+script = ExtResource("19_32j42")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world_border"]
+shape = SubResource("WorldBoundaryShape2D_ic0k6")
+
 [connection signal="body_entered" from="Decorations/Jump_sign2" to="Decorations/Jump_sign2" method="_on_body_entered"]
 [connection signal="body_exited" from="Decorations/Jump_sign2" to="Decorations/Jump_sign2" method="_on_body_exited"]
+[connection signal="body_entered" from="Decorations/shop" to="Decorations/shop" method="_on_body_entered"]
+[connection signal="body_exited" from="Decorations/shop" to="Decorations/shop" method="_on_body_exited"]
 [connection signal="body_entered" from="interactables/key" to="interactables/key" method="_on_body_entered"]
+[connection signal="body_entered" from="world_border" to="world_border" method="_on_body_entered"]

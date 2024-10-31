@@ -3,9 +3,12 @@ extends Node2D
 @onready var player_health = $"../Player".health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position.x = $"../Player".position.x
 	position.y = $"../Player".position.y + 125
+	
+	if position.y > 75:
+		position.y = 75
 	
 	player_health = $"../Player".health
 	
