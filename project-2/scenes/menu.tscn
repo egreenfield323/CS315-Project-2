@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dna5k8i61dim3"]
+[gd_scene load_steps=10 format=3 uid="uid://dna5k8i61dim3"]
 
 [ext_resource type="Texture2D" uid="uid://c4380li82dak1" path="res://assets/tiles/background/background_layer_1.png" id="1_ycayh"]
 [ext_resource type="Texture2D" uid="uid://c642wy6gyiit4" path="res://assets/tiles/background/background_layer_2.png" id="2_kxs5e"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b8k4idju3guly" path="res://assets/objects/buttons/play03.png" id="6_p0d8j"]
 [ext_resource type="Texture2D" uid="uid://weurirfrc3wh" path="res://assets/objects/buttons/play02.png" id="7_oybxn"]
 [ext_resource type="Script" path="res://scripts/play_button.gd" id="8_j7uy2"]
+[ext_resource type="PackedScene" uid="uid://xdqy8y6fqyw4" path="res://scenes/sounds.tscn" id="9_1y45f"]
 
 [node name="menu" type="Node2D"]
 
@@ -88,5 +89,7 @@ texture_normal = ExtResource("5_q05xv")
 texture_pressed = ExtResource("6_p0d8j")
 texture_hover = ExtResource("7_oybxn")
 script = ExtResource("8_j7uy2")
+
+[node name="Sounds" parent="." instance=ExtResource("9_1y45f")]
 
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]

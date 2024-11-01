@@ -5,3 +5,5 @@ Skeleton enemy: https://astrobob.itch.io/animated-pixel-art-skeleton
 Keys: https://karsiori.itch.io/pixel-art-key-pack-animated
 GUI art: https://mounirtohami.itch.io/pixel-art-gui-elements
 Buttons: https://hiorespace.itch.io/freebuttonspixelanimation
+Music: https://tallbeard.itch.io/music-loop-bundle
+SFX: https://dillonbecker.itch.io/sdap

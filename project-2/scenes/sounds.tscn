@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://xdqy8y6fqyw4"]
+
+[ext_resource type="AudioStream" uid="uid://cpf3aht1ykeco" path="res://assets/sounds/jump.wav" id="1_8ombx"]
+[ext_resource type="AudioStream" uid="uid://dc4mw8jtbo7c" path="res://assets/sounds/bg.ogg" id="1_453je"]
+[ext_resource type="AudioStream" uid="uid://c23na0mugsdgo" path="res://assets/sounds/get.wav" id="3_ws6gu"]
+[ext_resource type="AudioStream" uid="uid://bgo0cvieqq450" path="res://assets/sounds/attack.wav" id="4_n0ty4"]
+[ext_resource type="AudioStream" uid="uid://c5nmon1mhhglo" path="res://assets/sounds/death.wav" id="5_qq2on"]
+[ext_resource type="AudioStream" uid="uid://bi5hlpjopnvex" path="res://assets/sounds/damage.wav" id="6_tfkto"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qv8lw"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("1_8ombx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dkf5l"]
+random_pitch = 1.08
+streams_count = 1
+stream_0/stream = ExtResource("3_ws6gu")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l2ut8"]
+random_pitch = 1.04
+streams_count = 1
+stream_0/stream = ExtResource("4_n0ty4")
+
+[node name="Sounds" type="Node2D"]
+
+[node name="bg" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_453je")
+volume_db = -12.0
+autoplay = true
+
+[node name="sfx" type="Node2D" parent="bg"]
+
+[node name="jump" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_qv8lw")
+volume_db = -11.0
+
+[node name="get" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_dkf5l")
+volume_db = -13.0
+
+[node name="attack" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_l2ut8")
+volume_db = -17.0
+
+[node name="death" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = ExtResource("5_qq2on")
+volume_db = -11.0
+
+[node name="damage" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = ExtResource("6_tfkto")
+volume_db = -11.0

@@ -25,3 +25,4 @@ func _end_level():
 	if !$"../..".ended_level:
 		$"../..".ended_level = true
 		$"../../Particles".play_particle("collect_key_particle", $"../../Player".position)
+		$"../../Player/Sounds/bg/sfx/get".playing = true
