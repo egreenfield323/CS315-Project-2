@@ -374,15 +374,17 @@ rendering_quadrant_size = 24
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="Path2D" type="Path2D" parent="enemies"]
+[node name="skeleton1" type="Node2D" parent="enemies"]
+
+[node name="Path2D" type="Path2D" parent="enemies/skeleton1"]
 curve = SubResource("Curve2D_0h2h5")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="enemies/Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="enemies/skeleton1/Path2D"]
 position = Vector2(2340, -118)
 rotation = 0.00306748
 rotates = false
 
-[node name="skeleton_enemy2" parent="enemies/Path2D/PathFollow2D" instance=ExtResource("17_c07um")]
+[node name="skeleton_enemy2" parent="enemies/skeleton1/Path2D/PathFollow2D" instance=ExtResource("17_c07um")]
 position = Vector2(-0.0276073, -8.99996)
 
 [node name="interactables" type="Node2D" parent="."]
