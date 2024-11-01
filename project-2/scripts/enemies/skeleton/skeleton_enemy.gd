@@ -33,3 +33,6 @@ func hit(amount: int):
 	if health == 0:
 		dead = true
 		anim_tree['parameters/conditions/death'] = true
+		$"../../../../Player/Sounds/bg/sfx/skeleton_die".playing = true
+	else:
+		$"../../../../Player/Sounds/bg/sfx/skeleton_hit".playing = true

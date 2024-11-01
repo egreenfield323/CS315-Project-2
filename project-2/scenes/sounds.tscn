@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xdqy8y6fqyw4"]
+[gd_scene load_steps=20 format=3 uid="uid://xdqy8y6fqyw4"]
 
 [ext_resource type="AudioStream" uid="uid://cpf3aht1ykeco" path="res://assets/sounds/jump.wav" id="1_8ombx"]
 [ext_resource type="AudioStream" uid="uid://dc4mw8jtbo7c" path="res://assets/sounds/bg.ogg" id="1_453je"]
@@ -6,6 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://bgo0cvieqq450" path="res://assets/sounds/attack.wav" id="4_n0ty4"]
 [ext_resource type="AudioStream" uid="uid://c5nmon1mhhglo" path="res://assets/sounds/death.wav" id="5_qq2on"]
 [ext_resource type="AudioStream" uid="uid://bi5hlpjopnvex" path="res://assets/sounds/damage.wav" id="6_tfkto"]
+[ext_resource type="AudioStream" uid="uid://c37iavnnjnwyb" path="res://assets/sounds/walk.wav" id="7_3q611"]
+[ext_resource type="AudioStream" uid="uid://dnb6q6ieinyb4" path="res://assets/sounds/rock.wav" id="7_siit7"]
+[ext_resource type="AudioStream" uid="uid://kqtw83g52d40" path="res://assets/sounds/skeleton/skeleton_hit.mp3" id="9_6m2d2"]
+[ext_resource type="AudioStream" uid="uid://byqdcx1cmlmdb" path="res://assets/sounds/skeleton/skeleton_attack.mp3" id="10_diafb"]
+[ext_resource type="AudioStream" uid="uid://bcjb4s748icy0" path="res://assets/sounds/skeleton/skeleton_die.mp3" id="11_b317k"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qv8lw"]
 random_pitch = 1.1
@@ -22,6 +27,31 @@ random_pitch = 1.04
 streams_count = 1
 stream_0/stream = ExtResource("4_n0ty4")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h2djd"]
+random_pitch = 1.08
+streams_count = 1
+stream_0/stream = ExtResource("7_3q611")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_btdrj"]
+random_pitch = 1.08
+streams_count = 1
+stream_0/stream = ExtResource("7_siit7")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fppg3"]
+random_pitch = 1.08
+streams_count = 1
+stream_0/stream = ExtResource("9_6m2d2")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qyl4m"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("10_diafb")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5t04b"]
+random_pitch = 1.08
+streams_count = 1
+stream_0/stream = ExtResource("11_b317k")
+
 [node name="Sounds" type="Node2D"]
 
 [node name="bg" type="AudioStreamPlayer2D" parent="."]
@@ -34,6 +64,7 @@ autoplay = true
 [node name="jump" type="AudioStreamPlayer2D" parent="bg/sfx"]
 stream = SubResource("AudioStreamRandomizer_qv8lw")
 volume_db = -11.0
+pitch_scale = 1.4
 
 [node name="get" type="AudioStreamPlayer2D" parent="bg/sfx"]
 stream = SubResource("AudioStreamRandomizer_dkf5l")
@@ -50,3 +81,24 @@ volume_db = -11.0
 [node name="damage" type="AudioStreamPlayer2D" parent="bg/sfx"]
 stream = ExtResource("6_tfkto")
 volume_db = -11.0
+
+[node name="walk" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_h2djd")
+volume_db = 12.952
+pitch_scale = 0.8
+attenuation = 0.064704
+
+[node name="rock" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_btdrj")
+
+[node name="skeleton_hit" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_fppg3")
+volume_db = -10.0
+
+[node name="skeleton_attack" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_qyl4m")
+volume_db = -10.0
+
+[node name="skeleton_die" type="AudioStreamPlayer2D" parent="bg/sfx"]
+stream = SubResource("AudioStreamRandomizer_5t04b")
+volume_db = -10.0

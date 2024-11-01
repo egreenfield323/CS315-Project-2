@@ -17,6 +17,7 @@ func hit(hitpoints: int):
 	var hit_particle = rock_hit_particles.instantiate()
 	add_child(hit_particle)
 	hit_particle.emitting = true
+	$"../../Player/Sounds/bg/sfx/rock".playing = true
 	
 	if (health <= 0):
 		queue_free()

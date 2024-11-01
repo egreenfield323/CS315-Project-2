@@ -42,13 +42,23 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			velocity.x = direction * SPEED
 			if is_on_floor():
+				if !$"Sounds/bg/sfx/walk".playing:
+					$"Sounds/bg/sfx/walk".playing = true
 				anim_tree['parameters/conditions/run'] = true
 				anim_tree['parameters/conditions/idle'] = false
+			else:
+				if $"Sounds/bg/sfx/walk".playing:
+					$"Sounds/bg/sfx/walk".playing = false
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			if is_on_floor():
+				if $"Sounds/bg/sfx/walk".playing:
+					$"Sounds/bg/sfx/walk".playing = false
 				anim_tree['parameters/conditions/run'] = false
 				anim_tree['parameters/conditions/idle'] = true
+			else:
+				if $"Sounds/bg/sfx/walk".playing:
+					$"Sounds/bg/sfx/walk".playing = false
 		
 		if Input.is_action_just_pressed("attack"):
 			$"Sounds/bg/sfx/attack".playing = true
@@ -70,6 +80,7 @@ func _on_sword_hitbox_body_entered(body):
 func hit():
 	health -= 1
 	if health > 0:
+		$"Sounds/bg/sfx/skeleton_attack".playing = true
 		$"Sounds/bg/sfx/damage".playing = true
 		anim_tree['parameters/conditions/hit'] = true
 		await get_tree().create_timer(0.3).timeout
